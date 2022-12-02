@@ -60,6 +60,7 @@
     "docgen": "npx solidity-docgen --solc-module solc-0.8 -t ./docs/templates -e ./contracts/verifiers,./contracts/mocks",
     "deploy:PoE2_0:hardhat": "npx hardhat run deployment/deployment_v2-0/deployPoE_v2-0.js --network hardhat",
     "deploy:PoE2_0:goerli": "npx hardhat run deployment/deployment_v2-0/deployPoE_v2-0.js --network goerli",
+    "deploy:PoE2_0:baobab": "npx hardhat run deployment/deployment_v2-0/deployPoE_v2-0.js --network baobab",
     "verify:PoE2_0:goerli": "npx hardhat run deployment/deployment_v2-0/verifyPoE_v2-0.js --network goerli",
     "lint": "npx eslint ./test && npx eslint ./docker/scripts && npx eslint ./deployment/deployment_v2-0",
     "lint:fix": "npx eslint ./test --fix && npx eslint ./docker/scripts --fix && npx eslint ./deployment/deployment_v2-0 --fix",

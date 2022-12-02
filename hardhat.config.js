@@ -73,6 +73,16 @@ module.exports = {
         count: 20,
       },
     },
+    baobab: {
+      url: "https://api.baobab.klaytn.net:8651",
+      networkId: 1001,
+      accounts: [ process.env.PRIVATEKEY ]
+    },
+    cypress: {
+      url: "https://public-node-api.klaytnapi.com/v1/cypress",
+      networkId: 8217,
+      accounts: [ process.env.PRIVATEKEY ]
+    },
     localhost: {
       url: "http://127.0.0.1:8545",
       accounts: {

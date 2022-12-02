@@ -97,6 +97,8 @@ async function main() {
     for (let i = 0; i < atemptsDeployProxy; i++) {
         try {
             globalExitRootManager = await upgrades.deployProxy(globalExitRootManagerFactory, [], { initializer: false });
+            await globalExitRootManager.deployed();
+            console.log("GlobalExitRootManager proxy deployed: " + globalExitRootManager.address);
             break;
         } catch (error) {
             console.log(`attempt ${i}`);
@@ -116,6 +118,8 @@ async function main() {
     for (let i = 0; i < atemptsDeployProxy; i++) {
         try {
             bridgeContract = await upgrades.deployProxy(bridgeFactory, [], { initializer: false });
+            await bridgeContract.deployed();
+            console.log("Bridge proxy deployed: " + bridgeContract.address);
             break;
         } catch (error) {
             console.log(`attempt ${i}`);
@@ -129,6 +133,8 @@ async function main() {
     for (let i = 0; i < atemptsDeployProxy; i++) {
         try {
             proofOfEfficiencyContract = await upgrades.deployProxy(ProofOfEfficiencyFactory, [], { initializer: false });
+            await proofOfEfficiencyContract.deployed();
+            console.log("ProofOfEfficiencyMock proxy deployed: " + proofOfEfficiencyContract.address);
             break;
         } catch (error) {
             console.log(`attempt ${i}`);
@@ -136,7 +142,8 @@ async function main() {
         }
     }
 
-    await globalExitRootManager.initialize(proofOfEfficiencyContract.address, bridgeContract.address);
+    let tx = await globalExitRootManager.initialize(proofOfEfficiencyContract.address, bridgeContract.address);
+    await tx.wait();
 
     console.log('#######################\n');
     console.log('globalExitRootManager deployed to:', globalExitRootManager.address);
@@ -144,7 +151,8 @@ async function main() {
     /*
      * Initialize Bridge
      */
-    await bridgeContract.initialize(networkIDMainnet, globalExitRootManager.address);
+    tx = await bridgeContract.initialize(networkIDMainnet, globalExitRootManager.address);
+    await tx.wait();
 
     console.log('#######################\n');
     console.log('Bridge deployed to:', bridgeContract.address);
